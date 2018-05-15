@@ -1,17 +1,14 @@
-TinyWebDav
+WebDavServer
 ==========
-
-A Single File,Tiny, Python WebDav Server .
-
-    1. It's just one 27K Python file.
-    2. It's can run more python system.
-       a. runing PC/OSX/Linux Python.
-       b. runing on IOS Pythonista(iPad or iPhone) or IOS Editorial (iPad).
-       c. runing on RaspBerry Pi and more...
-    3. It's support PC/OSX/IOS Webdav client.
+Python class which implements a WebDav Server. The server sits behind a webserver like Apache or Nginx with reverse proxy settings. 
 
 
-20170907 Change Log:
-===================
-1. Fix Coda WebDav access problem.(because Coda WebDav all xml item add xmlns="DAV:".)
+The project is forked of the awesome work that has been done on [TinyWebdavSever [link1] ]
+
+
+[link1] : https://github.com/wolf71/TinyWebDav
+
+
+
+
 
