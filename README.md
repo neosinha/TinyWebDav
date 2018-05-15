@@ -27,9 +27,10 @@ optional arguments:
 	```
 		python davserver.py --port 8805 --dir /Volumes/Disk03/datasets/ 
  	```
- 	After the program has successfully started, the DAV server should prompt for a firewall check on OSX if you have enabled it.
- 	On linux, please ensure that port 8085 is configured for HTTP traffic and is not blocked. 
  	
+ 	On OSX, this should show a prompt asking if python app should be allowed to accept incoming connections on port 8085. This is just making a temporary exception to the firewall/security rules. 
+ 	On linux, please ensure that port 8085 is configured for HTTP traffic and is not blocked. 
+ 	![Server Firewall](https://github.com/neosinha/WebdavServlet/blob/gh-pages/docs/images/security-prompt.png)
  	
  	
  Servelet Deployment: 
