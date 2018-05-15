@@ -3,9 +3,10 @@ WebDavServerlet
 Python class which implements a WebDav Serverlet. The server sits behind a webserver like Apache or Nginx with reverse proxy settings.
 The intent of this servelet is to allow client applications have very easy access to a larger storage volume(s) on a server.
 
-Usgae: 
+Usage: 
 ====
- 
+
+``` 
 optional arguments:
   -h, --help            show this help message and exit
   -p PORT, --port PORT  Port number for WebDav Server
@@ -17,6 +18,7 @@ optional arguments:
   -d DIR, --dir DIR     Directory on a mounted volume to serve as the root of
                         the webdav-server
  
+ ```
  
  Servelet Deployment: 
  ====
