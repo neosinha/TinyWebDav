@@ -40,6 +40,7 @@
 
 from BaseHTTPServer import HTTPServer, BaseHTTPRequestHandler
 from SocketServer import ThreadingMixIn
+import socket
 from StringIO import StringIO
 import sys,urllib,re,urlparse
 from time import time, timezone, strftime, localtime, gmtime
@@ -737,14 +738,26 @@ class BufWriter:
         return len(self.buf.getvalue().encode('utf-8'))
        
 class DAVServer(ThreadingMixIn, HTTPServer):
-    def __init__(self, addr, handler, root, userpwd):
+    def __init__(self, addr, handler, fileroot=None, userpwd=None):
         HTTPServer.__init__(self, addr, handler)
-        self.root = root
-        self.userpwd = userpwd      # WebDav Auth user:passwd 
-        if len(userpwd)>0:
-            self.auth_enable = True
-        else:
-            self.auth_enable = False
+        
+        # Handle auth with Apache or Ngnix or external hooks
+        self.auth_enable = False
+        self.root = os.path.join(os.getcwd(), 'webdav')
+        self.userpwd = "" 
+        
+        if fileroot:
+            self.root = fileroot
+            
+        if userpwd: 
+            self.userpwd = userpwd      # WebDav Auth user:passwd 
+            if len(userpwd)>0:
+                self.auth_enable = True
+            else:
+                self.auth_enable = False
+
+        print("[Info] DAV root directory: {}".format(self.root))
+        
 
     # disable the broken pipe error message 
     def finish_request(self,request,client_address):
@@ -766,7 +779,7 @@ if __name__ == '__main__':
     ap.add_argument("-d", "--dir", required=True,
                 help="Directory on a mounted volume to serve as the root of the webdav-server")
 
-    # Arguments 
+    # Parse Arguments 
     args = vars(ap.parse_args())
     # WebDav TCP Port 
     portnum = int(args["port"])
@@ -782,15 +795,14 @@ if __name__ == '__main__':
     
     
     # Get local IP address
-    # import socket
     # lanip = get_localip()
-    print('Staring WebDav Server run on http://{}:{}'.format(lanip, portnum))
+    print('Staring WebDav Server run on http://{}:{}'.format(ipaddress, portnum))
     server_address = ('', portnum)
     
     # first is Server root dir, Second is virtual dir
     # **** Change first ./ to your dir , etc :/mnt/flash/public 
-    root = DirCollection(davdir, '/')
-    httpd = DAVServer(server_address, DAVRequestHandler, root, userpwd)
+    fileroot = DirCollection(davdir, '/')
+    httpd = DAVServer(server_address, DAVRequestHandler, fileroot=fileroot, userpwd=None)
     httpd.serve_forever()       # todo: add some control over starting and stopping the server
     
     

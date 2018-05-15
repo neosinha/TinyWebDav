@@ -20,6 +20,18 @@ optional arguments:
  
  ```
  
+ Linux/MAC OS: 
+ ====
+ 	In our example we use port 8085 and webdav volume location to be /Volumes/Disk03/datasets
+	Go to a command line window 
+	```
+		python davserver.py --port 8805 --dir /Volumes/Disk03/datasets/ 
+ 	```
+ 	After the program has successfully started, the DAV server should prompt for a firewall check on OSX if you have enabled it.
+ 	On linux, please ensure that port 8085 is configured for HTTP traffic and is not blocked. 
+ 	
+ 	
+ 	
  Servelet Deployment: 
  ====
  
