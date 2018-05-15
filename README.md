@@ -32,11 +32,16 @@ optional arguments:
  On OSX, this should show a prompt asking if python app should be allowed to accept incoming connections on port 8085. This is just making a temporary exception to the firewall/security rules. 
  On linux, please ensure that port 8085 is configured for HTTP traffic and is not blocked. 
  	
- ![Server Firewall](https://github.com/neosinha/WebdavServlet/blob/gh-pages/docs/images/security-prompt.png)
+![Server Firewall](https://github.com/neosinha/WebdavServlet/blob/gh-pages/docs/images/security-prompt.png)
+
+After this the server should be configured. It is easy to fireup a MAC OSX client or cadaver on linux to browse the Webdav mount. 
+
+
  	
  	
- Servelet Deployment: 
- ====
+Servelet Deployment: 
+====
+In order to make this a scalable deployment, an architecture is suggested below. 
  
 ![Servelet Architecture](https://github.com/neosinha/WebdavServlet/blob/gh-pages/docs/images/WebdavServelet.001.jpeg)
 
