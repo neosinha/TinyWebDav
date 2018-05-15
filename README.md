@@ -17,20 +17,22 @@ optional arguments:
                         a rev-proxy
   -d DIR, --dir DIR     Directory on a mounted volume to serve as the root of
                         the webdav-server
- 
  ```
+ 
  
  Linux/MAC OS: 
  ====
- 	In our example we use port 8085 and webdav volume location to be /Volumes/Disk03/datasets
-	Go to a command line window 
-	```
+ In our example we use port 8085 and webdav volume location to be /Volumes/Disk03/datasets
+ Go to a command line window 
+ 
+```
 		python davserver.py --port 8805 --dir /Volumes/Disk03/datasets/ 
- 	```
+```
  	
- 	On OSX, this should show a prompt asking if python app should be allowed to accept incoming connections on port 8085. This is just making a temporary exception to the firewall/security rules. 
- 	On linux, please ensure that port 8085 is configured for HTTP traffic and is not blocked. 
- 	![Server Firewall](https://github.com/neosinha/WebdavServlet/blob/gh-pages/docs/images/security-prompt.png)
+ On OSX, this should show a prompt asking if python app should be allowed to accept incoming connections on port 8085. This is just making a temporary exception to the firewall/security rules. 
+ On linux, please ensure that port 8085 is configured for HTTP traffic and is not blocked. 
+ 	
+ ![Server Firewall](https://github.com/neosinha/WebdavServlet/blob/gh-pages/docs/images/security-prompt.png)
  	
  	
  Servelet Deployment: 
