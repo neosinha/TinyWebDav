@@ -1,5 +1,4 @@
 # _*_ coding:utf-8 _*_
-
 #   Tiny WebDav Server for Pythonista - IOS.  (Base on pandav WebDav server )
 #
 #   (C)2013/11                                        By: Lai ChuJiang
@@ -32,7 +31,12 @@
 # Base : pandav v0.2 
 # Copyright (c) 2005.-2006. Ivan Voras <ivoras@gmail.com>
 # Released under the Artistic License
-#
+# 
+# 2018-05, Navendu Sinha 
+#  
+#  Adding argparse
+
+
 
 from BaseHTTPServer import HTTPServer, BaseHTTPRequestHandler
 from SocketServer import ThreadingMixIn
@@ -40,15 +44,9 @@ from StringIO import StringIO
 import sys,urllib,re,urlparse
 from time import time, timezone, strftime, localtime, gmtime
 import os, shutil, uuid, md5, mimetypes, base64
+import argparse
 
-# 获取本机IP地址
-def get_localip():
-    try:
-       gAdd = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-       gAdd.connect(('www.bing.com', 80))
-       return gAdd.getsockname()[0]
-    except:
-       return '127.0.0.1'
+
 
 class Member:
     M_MEMBER = 1           
@@ -756,28 +754,43 @@ class DAVServer(ThreadingMixIn, HTTPServer):
             pass
 
 if __name__ == '__main__':
+    ap = argparse.ArgumentParser()  
+    ap.add_argument("-p", "--port", required=True,
+                help="Port number for WebDav Server")
+
+    ap.add_argument("-i", "--ipaddress", required=False, 
+                    help="Bind to the given ipaddress else, would run on a local ip address.\
+                         Loopback interface 127.0.0.1 would be used if no option is provided\
+                         This useful if running behing a rev-proxy")
+
+    ap.add_argument("-d", "--dir", required=True,
+                help="")
+
+    # Arguments 
+    args = vars(ap.parse_args())
     # WebDav TCP Port 
-    srvport = 8000
+    portnum = int(args["port"])
+    
+    # Bind to local or on Lan IP address 
+    ipaddress = '127.0.0.1'
+    if args["ipaddress"]: 
+        ipaddress = args["ipaddress"]
+        
+        
+    # Webdav Directory
+    davdir = args["dir"]
+    
+    
     # Get local IP address
-    import socket
-    myaddr = get_localip()
-    print 'WebDav Server run at '+myaddr+':'+str(srvport)+'...'
-    server_address = ('', srvport)
-    # WebDav Auth User/Password file 
-    # if not this file ,the auth function disable.
-    # file format: user:passwd\n user:passwd\n
-    # or you can change your auth mode and file save format 
-    userpwd = []
-    try:
-        f = file('wdusers.conf', 'r')
-        for uinfo in f.readlines():
-            uinfo = uinfo.replace('\n','')
-            if len(uinfo)>2:
-                userpwd.append(base64.b64encode(uinfo))
-    except:
-        pass
+    # import socket
+    # lanip = get_localip()
+    print('Staring WebDav Server run on http://{}:{}'.format(lanip, portnum))
+    server_address = ('', portnum)
+    
     # first is Server root dir, Second is virtual dir
     # **** Change first ./ to your dir , etc :/mnt/flash/public 
-    root = DirCollection('./../', '/')
+    root = DirCollection(davdir, '/')
     httpd = DAVServer(server_address, DAVRequestHandler, root, userpwd)
     httpd.serve_forever()       # todo: add some control over starting and stopping the server
+    
+    
