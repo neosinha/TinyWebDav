@@ -30,6 +30,7 @@ optional arguments:
  	
  	On OSX, this should show a prompt asking if python app should be allowed to accept incoming connections on port 8085. This is just making a temporary exception to the firewall/security rules. 
  	On linux, please ensure that port 8085 is configured for HTTP traffic and is not blocked. 
+ 	
  	![Server Firewall](https://github.com/neosinha/WebdavServlet/blob/gh-pages/docs/images/security-prompt.png)
  	
  	
