@@ -29,21 +29,12 @@ optional arguments:
 		python davserver.py --port 8805 --dir /Volumes/Disk03/datasets/ 
 ```
  	
-<<<<<<< HEAD
  On OSX, this should show a prompt asking if python app should be allowed to accept incoming connections on port 8085. This is just making a temporary exception to the firewall/security rules. 
  On linux, please ensure that port 8085 is configured for HTTP traffic and is not blocked. 
  	
 ![Server Firewall](https://github.com/neosinha/WebdavServlet/blob/gh-pages/docs/images/security-prompt.png)
 
 After this the server should be configured. It is easy to fireup a MAC OSX client or cadaver on linux to browse the Webdav mount. 
-
-
-=======
- 	On OSX, this should show a prompt asking if python app should be allowed to accept incoming connections on port 8085. This is just making a temporary exception to the firewall/security rules. 
- 	On linux, please ensure that port 8085 is configured for HTTP traffic and is not blocked. 
- 	
- 	![Server Firewall](https://github.com/neosinha/WebdavServlet/blob/gh-pages/docs/images/security-prompt.png)
->>>>>>> branch 'gh-pages' of https://github.com/neosinha/WebdavServlet.git
  	
  	
 Servelet Deployment: 
