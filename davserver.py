@@ -764,7 +764,7 @@ if __name__ == '__main__':
                          This useful if running behing a rev-proxy")
 
     ap.add_argument("-d", "--dir", required=True,
-                help="")
+                help="Directory on a mounted volume to serve as the root of the webdav-server")
 
     # Arguments 
     args = vars(ap.parse_args())
